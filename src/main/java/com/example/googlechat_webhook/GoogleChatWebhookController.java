@@ -1,4 +1,3 @@
-//Corre el proyecto con mvn spring-boot:run
 package com.example.googlechat_webhook;
 
 import org.springframework.http.ResponseEntity;
@@ -7,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +17,13 @@ public class GoogleChatWebhookController {
     //Método que maneja las solicitudes POST en la ruta /send
     @PostMapping("/send")
     public ResponseEntity<String> sendMessage(@RequestParam String webhookUrl, 
-                                              @RequestParam String message) {
+                                              @RequestParam String message, 
+                                              @RequestParam String authorization) {
+        
+        // Validación del valor de authorization
+        if (!"1376923204".equals(authorization)) {
+            return ResponseEntity.status(403).body("Unauthorized: Invalid authorization token");
+        }
         
         // Crea una instancia de RestTemplate para realizar solicitudes HTTP
         RestTemplate restTemplate = new RestTemplate();  

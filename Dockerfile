@@ -1,14 +1,14 @@
-# Usar una imagen base de OpenJDK (Java 17 en este caso)
-FROM openjdk:17-jdk-slim
+# Usar una imagen base de Tomcat con OpenJDK 21
+FROM tomcat:9.0-jdk21-openjdk-slim
 
 # Establecer el directorio de trabajo dentro del contenedor
-WORKDIR /app
+WORKDIR /usr/local/tomcat/webapps
 
-# Copiar el archivo JAR al contenedor
-COPY target/googlechat-webhook-0.0.1-SNAPSHOT.jar app.jar
+# Copiar el archivo WAR al contenedor
+COPY target/googlechat-webhook-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/
 
-# Exponer el puerto que Spring Boot usará (por defecto es 8080)
+# Exponer el puerto 8080 para que Tomcat lo use
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación JAR
-CMD ["java", "-jar", "app.jar"]
+# Comando para iniciar Tomcat
+CMD ["catalina.sh", "run"]
