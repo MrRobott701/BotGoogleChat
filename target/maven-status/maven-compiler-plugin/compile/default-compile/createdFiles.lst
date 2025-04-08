@@ -1,2 +1,3 @@
-com\example\googlechat_webhook\GooglechatWebhookApplication.class
-com\example\googlechat_webhook\GoogleChatWebhookController.class
+com\Webhooks\BotWebhook\ServletInitializer.class
+com\Webhooks\BotWebhook\GoogleChatController.class
+com\Webhooks\BotWebhook\BotWebhookApplication.class
